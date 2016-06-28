@@ -1,0 +1,48 @@
+body {
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+	color: #535353;
+}
+
+#custom-nav {
+	border-radius: 0px;
+	margin-bottom: 0px;
+	background-color: #333333;
+	font-size: 18px;
+}
+
+.welcome {
+	text-align: center;
+	color: #708CB2;
+}
+
+.welcome-sub {
+	text-align: center;
+
+}
+
+.head {
+	border-bottom: 1px #ADADAD solid;
+	padding-bottom: 15px;
+	padding-top: 5px;
+	background-color: #EDEDED;
+}
+
+.main-content {
+	padding: 0px;
+}
+
+.left {
+	border: 1px #ADADAD solid;
+	height: 500px;
+}
+
+.right {
+	border: 1px #ADADAD solid;
+	height: 500px;
+}
+
+.video {
+	text-align: center;
+	display: block;
+	padding-top: 60px;
+}
