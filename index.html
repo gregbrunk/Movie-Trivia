@@ -10,26 +10,33 @@
 	<link rel="stylesheet" type="text/css" href="style/style.css"/>
 </head>
 <body>
-<nav class="navbar navbar-light bg-faded" id="custom-nav">
-	<div class="container-fluid">
-		<a href="#" class="nav navbar-brand" style="color: #5aa2ce">Movie Trivia!</a>
-		<ul class="nav navbar-nav">
-			<li class="nav-item active"><a href="#" class="nav-link">Start New Game</a></li>
-			<li class="nav-item"><a href="https://www.youtube.com/watch?v=okhYfZBjr-A" class="nav-link">Change Timer</a></li>
-			<li class="nav-item"><a href="http://bringinthecats.com/" class="nav-link">Don't Click Here!</a></li>
-		</ul>
-	</div>
-</nav>
-
-<!-- <div class="row head">
-		<div class="col-md-12">
-			<h2 class="welcome">WELCOME TO MOVIE TRIVIA!</h1>
-			<h4 class="welcome-sub"><b>The rules are simple</b>: pick the movie that corresponds to the clip as fast as you can!</h3>
+	<!-- Nav/Header -->
+	<nav class="navbar navbar-light bg-faded" id="custom-nav">
+		<div class="container-fluid">
+			<a href="#" class="nav navbar-brand" style="color: #457fca">Movie Trivia!</a>
+			<ul class="nav navbar-nav">
+				<li class="nav-item active"><a href="#" class="nav-link">Start New Game</a></li>
+				<li class="nav-item"><a href="https://www.youtube.com/watch?v=okhYfZBjr-A" class="nav-link">Change Timer</a></li>
+				<li class="nav-item"><a href="http://bringinthecats.com/" class="nav-link">Don't Click Here!</a></li>
+			</ul>
 		</div>
-	</div> -->
-
-	<div class="container-fluid col-md-12" id="main-content">
+	</nav>
+	
+	<!-- Start Screen -->
+	<div class="container-fluid col-md-12 overlay">
+		<div class="row start-content">
+			<div class="col-md-6 col-md-offset-3">
+				<h1 id="welcome">Welcome to Movie Trivia!</h1>
+				<p id="rules"><span style="font-weight: 200">The rules are simple</span>: You have 30 seconds to guess the name of the movie. The sooner you answer, the more points you get.</p>
+				<button type="button" class="btn btn-primary-outline btn-lg" id="start">I'm Ready!</button>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Game Screen -->
+	<div class="container-fluid col-md-12 hide" id="main-content">
 		
+		<!-- Trivia Pane -->
 		<div class="col-md-8 left">
 			<div class="col-md-12 round">
 				<h1 style="font-size: 40px">Round #1</h1>
@@ -52,7 +59,8 @@
 				</div>
 			</div>
         </div>
-
+		
+		<!-- Stats Pane -->
 		<div class="col-md-4 right">
 			<div class="row">
 				<div class="col-md-12 time-score">
@@ -78,18 +86,20 @@
 			</div>
 		</div>
 	</div>
-
+	
+	<!-- Footer -->
 	<footer class="footer">
       <div class="container">
         <a href="https://github.com/gregbrunk"><img src="images/logo.png" height="20px"></img></a>
       </div>
     </footer>
 	
-	<!-- jQuery CDN -->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-	<!-- Bootstrap JS CDN--> 
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
-	<!-- Local Scripts -->
-	<script type="text/javascript" src="scripts/app.js"></script>
+	<!-- Scripts -->
+		<!-- jQuery CDN -->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<!-- Bootstrap JS CDN--> 
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+		<!-- Local Scripts -->
+		<script type="text/javascript" src="scripts/app.js"></script>
 </body>
 </html>

@@ -13,6 +13,20 @@ var buttonTwo = $('#movie2');
 var buttonThree = $('#movie3');
 var buttonFour = $('#movie4');
 
+
+$("#start").click(startGame);
+
+function startGame(){
+	$(".overlay").addClass("hide");
+	$("#main-content").removeClass("hide");
+	//Start the Round
+	new Round(videoOne.url, videoOne.movieName, videoOne.wrongNameOne, videoOne.wrongNameTwo, videoOne.wrongNameThree).start();
+	//Start the Timer
+	new Timer(30).applyTimer();
+	//Start the Scoring
+	new Score(300).applyScorer();
+}
+
 //Build Round Constructor
 function Round(url, movieName, wrongNameOne, wrongNameTwo, wrongNameThree) {
 	this.url = url;
@@ -62,9 +76,6 @@ Round.prototype = {
 	}
 };
 
-//Start the Round
-new Round(videoOne.url, videoOne.movieName, videoOne.wrongNameOne, videoOne.wrongNameTwo, videoOne.wrongNameThree).start();
-
 
 //Build Timer Constructor
 function Timer(time){
@@ -96,8 +107,6 @@ Timer.prototype = {
 		}
 	},
 };
-new Timer(30).applyTimer();
-
 
 //Build Score Constructor
 function Score(score){
@@ -129,4 +138,3 @@ Score.prototype = {
 		}
 	},
 };
-new Score(300).applyScorer();
