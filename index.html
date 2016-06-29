@@ -12,7 +12,7 @@
 <body>
 <nav class="navbar navbar-light bg-faded" id="custom-nav">
 	<div class="container-fluid">
-		<a href="#" class="navbar-brand" style="padding-top: 6px"><img src="images/logo.png" height="27px"></a>
+		<a href="#" class="nav navbar-brand" style="color: #485563">Movie Trivia!</a>
 		<ul class="nav navbar-nav">
 			<li class="nav-item active"><a href="#" class="nav-link">Start New Game</a></li>
 			<li class="nav-item"><a href="http://bringinthecats.com/" class="nav-link">Don't Click Here!</a></li>
@@ -30,12 +30,14 @@
 	<div class="container-fluid col-md-12" id="main-content">
 		
 		<div class="col-md-8 left">
+			
 			<div class="col-md-12 round">
-				<h1 style="font-size: 50px">Round #1</h1>
+				<h1 style="font-size: 40px">Round #1</h1>
 			</div>
 
-			<div class="col-md-8 col-md-offset-2 video">
-				<iframe width="600" height="342" src="http://www.youtube.com/embed/uE7ZkZADZwI?modestbranding=1&autoplay=1&controls=0&fs=0&iv_load_policy=3&loop=1&rel=0&showinfo=0&disablekb=1" frameborder="0"></iframe>
+
+			<div class="col-md-12 video">
+				<iframe id="video-frame" width="600" height="342" frameborder="0"></iframe>
 			</div>
 
 			<div class="row">
@@ -46,12 +48,13 @@
 					<h3>Which Movie Is This Clip From?</h3>
 				</div>
 				<div class="col-md-12 movie-buttons-group">
-					<button type="button" class="btn btn-secondary-outline" id="movie1">Movie 1 With Long Title</button>
-					<button type="button" class="btn btn-secondary-outline" id="movie2">Movie 2</button>
-					<button type="button" class="btn btn-secondary-outline" id="movie3">Movie 3</button>
-					<button type="button" class="btn btn-secondary-outline" id="movie4">Movie 4</button>
+					<button type="button" class="btn btn-secondary-outline" id="movie1"></button>
+					<button type="button" class="btn btn-secondary-outline" id="movie2"></button>
+					<button type="button" class="btn btn-secondary-outline" id="movie3"></button>
+					<button type="button" class="btn btn-secondary-outline" id="movie4"></button>
 				</div>
 			</div>
+
         </div>
 
 		<div class="col-md-4 right"></div>
@@ -60,7 +63,7 @@
 
 	<footer class="footer">
       <div class="container">
-        <p>This Site Is Terrible!</p>
+        <a href="https://github.com/gregbrunk"><img src="images/logo.png" height="20px"></img></a>
       </div>
     </footer>
 	
