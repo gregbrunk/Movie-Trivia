@@ -66,12 +66,14 @@ Round.prototype = {
 new Round(videoOne.url, videoOne.movieName, videoOne.wrongNameOne, videoOne.wrongNameTwo, videoOne.wrongNameThree).start();
 
 
+//Build Timer Constructor
 function Timer(time){
 	this.time = time;
 	this.timerDisplay = $('.time');
 	this.timeInterval = "";
 }
 
+//Setup Timer Methods
 Timer.prototype = {
 	applyTimer: function(){
 		var timer = $("<p>");
@@ -97,12 +99,14 @@ Timer.prototype = {
 new Timer(30).applyTimer();
 
 
+//Build Score Constructor
 function Score(score){
 	this.score = score;
 	this.scoreDisplay = $('.score');
 	this.scoreInterval = "";
 }
 
+//Setup Score Methods
 Score.prototype = {
 	applyScorer: function(){
 		var scorer = $("<p>");
@@ -126,43 +130,3 @@ Score.prototype = {
 	},
 };
 new Score(300).applyScorer();
-
-/* !OLD FUNCTIONAL CODE!
-
-//Set the iframe to display the right video
-function setVideo() {
-	var currentUrl = videoOne.url;
-	var video = $('#video-frame');
-	video.attr('src', currentUrl);
-	console.log(currentUrl);
-	console.log(video);
-}
-setVideo();
-
-function randomizeAnswers(array) {
-    var j, x;
-    for(var i = array.length; i; i -= 1) {
-        j = Math.floor(Math.random() * i);
-        x = array[i - 1];
-        array[i - 1] = array[j];
-        array[j] = x;
-    }
-    videoOne.shuffledAnswers = array;
-}
-var orderedAnswers = [videoOne.movieName,videoOne.wrongNameOne,videoOne.wrongNameTwo,videoOne.wrongNameThree];
-randomizeAnswers(orderedAnswers);
-console.log(orderedAnswers);
-console.log(videoOne.shuffledAnswers);
-
-function setButtons() {
-	var buttonOne = $('#movie1');
-	var buttonTwo = $('#movie2');
-	var buttonThree = $('#movie3');
-	var buttonFour = $('#movie4');
-	buttonOne.html(videoOne.shuffledAnswers[0]);
-	buttonTwo.html(videoOne.shuffledAnswers[1]);
-	buttonThree.html(videoOne.shuffledAnswers[2]);
-	buttonFour.html(videoOne.shuffledAnswers[3]);
-}
-setButtons();
-*/
