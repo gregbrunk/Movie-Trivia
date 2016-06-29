@@ -115,6 +115,10 @@ iframe {
     color: #29323c;
 }
 
+.red {
+	color: #ea2525;
+}
+
 .tally-group {
 	height: 80px;
 	padding-top: 25px;

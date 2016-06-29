@@ -65,10 +65,11 @@ Round.prototype = {
 //Start the Round
 new Round(videoOne.url, videoOne.movieName, videoOne.wrongNameOne, videoOne.wrongNameTwo, videoOne.wrongNameThree).start();
 
+
 function Timer(time){
 	this.time = time;
 	this.timerDisplay = $('.time');
-	this.timer = "";
+	this.timeInterval = "";
 }
 
 Timer.prototype = {
@@ -78,21 +79,53 @@ Timer.prototype = {
 		timer.html(":" + this.time);
 		this.timerDisplay.append(timer);
 		var self = this;
-		this.timer = setInterval(function(){
+		this.timeInterval = setInterval(function(){
 			self.runTimer(timer);},1000);
 	},
 	runTimer: function(timer) {
 		if (this.time>=1) {
 			this.time--;
 		} else {
-			window.clearInterval(this.timer);
+			window.clearInterval(this.timeInterval);
 		}
 		timer.html(":" + this.time);
+		if (this.time<=5) {
+			timer.addClass('red');
+		}
 	},
 };
 new Timer(30).applyTimer();
 
 
+function Score(score){
+	this.score = score;
+	this.scoreDisplay = $('.score');
+	this.scoreInterval = "";
+}
+
+Score.prototype = {
+	applyScorer: function(){
+		var scorer = $("<p>");
+		scorer.attr('class', 'big');
+		scorer.html(":" + this.score);
+		this.scoreDisplay.append(scorer);
+		var self = this;
+		this.scoreInterval = setInterval(function(){
+			self.runScore(scorer);},100);
+	},
+	runScore: function(scorer) {
+		if (this.score>0) {
+			this.score = this.score - 1;
+		} else {
+			window.clearInterval(this.scoreInterval);
+		}
+		scorer.html(this.score);
+		if (this.score<=50) {
+			scorer.addClass('red');
+		}
+	},
+};
+new Score(300).applyScorer();
 
 /* !OLD FUNCTIONAL CODE!
 
