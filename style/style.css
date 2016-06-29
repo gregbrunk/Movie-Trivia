@@ -41,23 +41,23 @@ iframe {
 	margin-bottom: 0px;
 }
 
-/*Instructions Pane*/
-/*.welcome {
-	text-align: center;
-	color: #708CB2;
-}
+	/*Instructions Pane*/
+	/*.welcome {
+		text-align: center;
+		color: #708CB2;
+	}
 
-.welcome-sub {
-	text-align: center;
-}
+	.welcome-sub {
+		text-align: center;
+	}
 
-.head {
-	border-bottom: 1px #ADADAD solid;
-	padding-bottom: 15px;
-	padding-top: 5px;
-	background-color: #EDEDED;	
-	min-height: 98px;
-}*/
+	.head {
+		border-bottom: 1px #ADADAD solid;
+		padding-bottom: 15px;
+		padding-top: 5px;
+		background-color: #EDEDED;	
+		min-height: 98px;
+	}*/
 
 #main-content {
 	height: calc(100vh - 50px - 50px);

@@ -65,6 +65,34 @@ Round.prototype = {
 //Start the Round
 new Round(videoOne.url, videoOne.movieName, videoOne.wrongNameOne, videoOne.wrongNameTwo, videoOne.wrongNameThree).start();
 
+function Timer(time){
+	this.time = time;
+	this.timerDisplay = $('.time');
+	this.timer = "";
+}
+
+Timer.prototype = {
+	applyTimer: function(){
+		var timer = $("<p>");
+		timer.attr('class', 'big');
+		timer.html(":" + this.time);
+		this.timerDisplay.append(timer);
+		var self = this;
+		this.timer = setInterval(function(){
+			self.runTimer(timer);},1000);
+	},
+	runTimer: function(timer) {
+		if (this.time>=1) {
+			this.time--;
+		} else {
+			window.clearInterval(this.timer);
+		}
+		timer.html(":" + this.time);
+	},
+};
+new Timer(30).applyTimer();
+
+
 
 /* !OLD FUNCTIONAL CODE!
 
