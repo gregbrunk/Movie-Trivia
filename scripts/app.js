@@ -24,7 +24,7 @@ var successful=0;
 $("#start").click(startGame);
 
 function startGame(){
-	$(".overlay").addClass("hide");
+	$("#start-screen").addClass("hide");
 	$("#main-content").removeClass("hide");
 	//Start the Round
 	thisRound = new Round(videoOne.url, videoOne.movieName, videoOne.wrongNameOne, videoOne.wrongNameTwo, videoOne.wrongNameThree);
@@ -154,7 +154,7 @@ function Timer(time){
 Timer.prototype = {
 	applyTimer: function(){
 		var timer = $("<p>");
-		timer.attr('class', 'big');
+		timer.attr({class: 'big', id:'timer'});
 		timer.html(":" + this.time);
 		this.timerDisplay.append(timer);
 		
@@ -231,12 +231,18 @@ Score.prototype = {
 function addWinner(){
 	roundTimer.stopInterval();
 	roundScorer.stopInterval();
+	$("#next-round").addClass("good-round");
+	$("#correct-incorrect").text("Correct!");
+	nextRoundScreen();
 }
 
 function addLoser(){
 	roundTimer.stopInterval();
 	roundScorer.stopInterval();
 	roundScorer.loserScore();
+	$("#next-round").addClass("bad-round");
+	$("#correct-incorrect").text("Nope!");
+	nextRoundScreen();
 }
 
 function updateScoreboard(movieName){
@@ -245,6 +251,7 @@ function updateScoreboard(movieName){
 	movie.addClass("movie");
 	movie.html(movieName);
 	$(rowClass).append(movie);
+	$("#your-answer").text(movieName);
 	
 	if (movieName !== thisRound.movieName) {
 		movie.addClass("wrong");
@@ -255,7 +262,38 @@ function updateTotals(movieName){
 	if (movieName == thisRound.movieName) {
 		successful++;
 		totalScore = totalScore + roundScorer.finalScore;
-		$("#successful").html(successful);
-		$("#totalScore").html(totalScore);
+		$("#successful").text(successful);
+		$("#totalScore").text(totalScore);
 	}
+}
+
+//Round Control Functions
+function nextRoundScreen(){
+	$("#trivia-screen").addClass("hide");
+	$("#next-round").removeClass("hide");
+}
+
+$("#next-round-button").click(nextRound);
+
+function nextRound(){
+	round++;
+	$("#next-round").addClass("hide");
+	$("#trivia-screen").removeClass("hide");
+	$('#scorer').remove();
+	$('#timer').remove();
+	$("#next-round").removeClass("bad-round");
+	$("#next-round").removeClass("good-round");
+	buttonOne.unbind();
+	buttonTwo.unbind();
+	buttonThree.unbind();
+	buttonFour.unbind();
+	//Start the Round
+	thisRound = new Round(videoOne.url, videoOne.movieName, videoOne.wrongNameOne, videoOne.wrongNameTwo, videoOne.wrongNameThree);
+	thisRound.start();
+	//Start the Timer
+	roundTimer = new Timer(30);
+	roundTimer.applyTimer();
+	//Start the Scoring
+	roundScorer = new Score(300);
+	roundScorer.applyScorer();
 }

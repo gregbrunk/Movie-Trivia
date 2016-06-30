@@ -21,6 +21,10 @@ iframe {
     outline: 0;
 }
 
+.buttonz {
+	font-weight: 100;
+}
+
 /*Navigation*/
 #custom-nav {
 	border-radius: 0px;
@@ -28,31 +32,32 @@ iframe {
 	z-index: 2;
 }
 
-/*Start/End Screens*/
+/*Start & End Screens*/
 .overlay {
 	text-align: center;
 	z-index: 1;
 	background-image: linear-gradient(90deg, #457fca, #5691c8);
 	height: calc(100vh - 50px - 50px);
+	margin-left: 0;
+	padding: 0;
 }
 
 .start-content {
 	margin-top: 180px;
 }
 
-#welcome {
+.welcome {
 	color: white;
 	margin-bottom: 30px;
 	font-size: 48px;
-	font-family: "Helvetica Neue";
 	font-weight: 200;
 }
 
-#rules {
+.rules {
 	color: white;
 	margin-bottom: 110px;
-	font-family: "Helvetica Neue";
 	font-weight: 100;
+	font-size: 20px;
 }
 
 #start {
@@ -93,6 +98,7 @@ iframe {
 	margin-top: 40px;
 	margin-bottom: 25px;
 	text-align: center;
+	font-size: 40px;
 }
 
 .video {
@@ -113,6 +119,49 @@ iframe {
 .movie-buttons-group button { 
 	font-size: 18px;
 	margin-left: 5px;
+}
+
+.good-round {
+	background-image: linear-gradient(90deg, #1D976C, #93F9B9);
+	text-align: center;
+	z-index: 1;
+	height: calc(100vh - 50px - 50px);
+	padding-top: 180px;
+	margin:0;
+}
+
+.bad-round {
+	background-image: linear-gradient(90deg, #e53935, #e35d5b);
+	text-align: center;
+	z-index: 1;
+	height: calc(100vh - 50px - 50px);
+	padding-top: 180px;
+	margin:0;
+}
+
+#correct-incorrect{
+	color: white;
+	margin-bottom: 30px;
+	font-size: 90px;
+	font-family: "Helvetica Neue";
+	font-weight: 200;
+}
+
+#next-round-button {
+	margin-top: 0px;
+	width: 150px;
+	border-color: white;
+	color: white;
+}
+
+#next-round-button:hover {
+	background-color: white;
+	color: #5691c8;
+}
+
+#next-round-button:active {
+	background-color: white;
+	color: #5691c8;
 }
 
 /*Right Side Content Pane*/
