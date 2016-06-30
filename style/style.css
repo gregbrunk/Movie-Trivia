@@ -195,11 +195,12 @@ iframe {
 	font-size: 14px;
 	font-weight: 200;
 	display: inline;
+	color: green;
 }
 
-.icon {
-	text-align: right;
-	display: inline;
+.wrong {
+	color: red;
+	text-decoration: line-through
 }
 
 /*Footer Content*/

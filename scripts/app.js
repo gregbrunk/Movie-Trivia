@@ -13,8 +13,12 @@ var buttonTwo = $('#movie2');
 var buttonThree = $('#movie3');
 var buttonFour = $('#movie4');
 var thisRound;
-var thisTimer;
-var thisScore;
+var roundTimer;
+var roundScorer;
+
+var totalScore = 0;
+var round=1;
+var successful=0;
 
 //Start Game Function
 $("#start").click(startGame);
@@ -23,13 +27,14 @@ function startGame(){
 	$(".overlay").addClass("hide");
 	$("#main-content").removeClass("hide");
 	//Start the Round
-	thisRound = new Round(videoOne.url, videoOne.movieName, videoOne.wrongNameOne, videoOne.wrongNameTwo, videoOne.wrongNameThree).start();
+	thisRound = new Round(videoOne.url, videoOne.movieName, videoOne.wrongNameOne, videoOne.wrongNameTwo, videoOne.wrongNameThree);
+	thisRound.start();
 	//Start the Timer
-	thisTimer = new Timer(30);
-	thisTimer.applyTimer();
+	roundTimer = new Timer(30);
+	roundTimer.applyTimer();
 	//Start the Scoring
-	thisScore = new Score(300);
-	thisScore.applyScorer();
+	roundScorer = new Score(300);
+	roundScorer.applyScorer();
 }
 
 //Build Round Constructor
@@ -82,6 +87,7 @@ Round.prototype = {
 	},
 	//Add Listeners to My Buttons (BAD CODE!)
 	addListeners: function(){
+		//Listener for Scoreboard
 		var correctAnswer = buttonOne;
 		//Set Right Answer
 		if(buttonOne.html() == this.movieName) {
@@ -115,6 +121,23 @@ Round.prototype = {
 			buttonTwo.click(addLoser);
 			buttonThree.click(addLoser);
 		}
+		var self = this;
+		buttonOne.click(function(){
+			updateScoreboard(self.shuffledAnswers[0]);
+			updateTotals(self.shuffledAnswers[0]);
+		});
+		buttonTwo.click(function(){
+			updateScoreboard(self.shuffledAnswers[1]);
+			updateTotals(self.shuffledAnswers[1]);
+		});
+		buttonThree.click(function(){
+			updateScoreboard(self.shuffledAnswers[2]);
+			updateTotals(self.shuffledAnswers[2]);
+		});
+		buttonFour.click(function(){
+			updateScoreboard(self.shuffledAnswers[3]);
+			updateTotals(self.shuffledAnswers[3]);
+		});
 	}
 };
 
@@ -134,6 +157,7 @@ Timer.prototype = {
 		timer.attr('class', 'big');
 		timer.html(":" + this.time);
 		this.timerDisplay.append(timer);
+		
 		var self = this;
 		this.timeInterval = setInterval(function(){
 			self.runTimer(timer);},1000);
@@ -152,7 +176,6 @@ Timer.prototype = {
 	stopInterval: function(){
 		window.clearInterval(this.timeInterval);
 		this.finalTime = this.time;
-		console.log(this.finalTime);
 	}
 };
 
@@ -189,7 +212,6 @@ Score.prototype = {
 	stopInterval: function(){
 		window.clearInterval(this.scoreInterval);
 		this.finalScore = this.score;
-		console.log(this.finalScore);
 	},
 	loserScore: function(){
 		//Set Score to 0
@@ -205,14 +227,35 @@ Score.prototype = {
 	}
 };
 
-//Answer Functions
+//Answer Completed Functions
 function addWinner(){
-	thisTimer.stopInterval();
-	thisScore.stopInterval();
+	roundTimer.stopInterval();
+	roundScorer.stopInterval();
 }
 
 function addLoser(){
-	thisTimer.stopInterval();
-	thisScore.stopInterval();
-	thisScore.loserScore();
+	roundTimer.stopInterval();
+	roundScorer.stopInterval();
+	roundScorer.loserScore();
+}
+
+function updateScoreboard(movieName){
+	var rowClass = "#row"+round;
+	var movie = $("<p>");
+	movie.addClass("movie");
+	movie.html(movieName);
+	$(rowClass).append(movie);
+	
+	if (movieName !== thisRound.movieName) {
+		movie.addClass("wrong");
+	}
+}
+
+function updateTotals(movieName){
+	if (movieName == thisRound.movieName) {
+		successful++;
+		totalScore = totalScore + roundScorer.finalScore;
+		$("#successful").html(successful);
+		$("#totalScore").html(totalScore);
+	}
 }
