@@ -12,6 +12,9 @@ var buttonOne = $('#movie1');
 var buttonTwo = $('#movie2');
 var buttonThree = $('#movie3');
 var buttonFour = $('#movie4');
+var thisRound;
+var thisTimer;
+var thisScore;
 
 //Start Game Function
 $("#start").click(startGame);
@@ -20,11 +23,13 @@ function startGame(){
 	$(".overlay").addClass("hide");
 	$("#main-content").removeClass("hide");
 	//Start the Round
-	new Round(videoOne.url, videoOne.movieName, videoOne.wrongNameOne, videoOne.wrongNameTwo, videoOne.wrongNameThree).start();
+	thisRound = new Round(videoOne.url, videoOne.movieName, videoOne.wrongNameOne, videoOne.wrongNameTwo, videoOne.wrongNameThree).start();
 	//Start the Timer
-	new Timer(30).applyTimer();
+	thisTimer = new Timer(30);
+	thisTimer.applyTimer();
 	//Start the Scoring
-	new Score(300).applyScorer();
+	thisScore = new Score(300);
+	thisScore.applyScorer();
 }
 
 //Build Round Constructor
@@ -100,7 +105,7 @@ Round.prototype = {
 		} else if (correctAnswer == buttonTwo) {
 			buttonOne.click(addLoser);
 			buttonThree.click(addLoser);
-			buttonFour.clikc(addLoser);
+			buttonFour.click(addLoser);
 		} else if (correctAnswer == buttonThree) {
 			buttonOne.click(addLoser);
 			buttonTwo.click(addLoser);
@@ -119,6 +124,7 @@ function Timer(time){
 	this.time = time;
 	this.timerDisplay = $('.time');
 	this.timeInterval = "";
+	this.finalTime = "";
 }
 
 //Setup Timer Methods
@@ -143,6 +149,11 @@ Timer.prototype = {
 			timer.addClass('red');
 		}
 	},
+	stopInterval: function(){
+		window.clearInterval(this.timeInterval);
+		this.finalTime = this.time;
+		console.log(this.finalTime);
+	}
 };
 
 //Build Score Constructor
@@ -150,6 +161,7 @@ function Score(score){
 	this.score = score;
 	this.scoreDisplay = $('.score');
 	this.scoreInterval = "";
+	this.finalScore = "";
 }
 
 //Setup Score Methods
@@ -157,7 +169,7 @@ Score.prototype = {
 	applyScorer: function(){
 		var scorer = $("<p>");
 		scorer.attr('class', 'big');
-		scorer.html(":" + this.score);
+		scorer.html(this.score);
 		this.scoreDisplay.append(scorer);
 		var self = this;
 		this.scoreInterval = setInterval(function(){
@@ -174,13 +186,37 @@ Score.prototype = {
 			scorer.addClass('red');
 		}
 	},
+	stopInterval: function(){
+		window.clearInterval(this.scoreInterval);
+		this.finalScore = this.score;
+		console.log(this.finalScore);
+	},
+	loserScore: function(){
+		//Set Score to 0
+		this.score = 0;
+		//Empty Score Display
+		this.scoreDisplay.empty();
+		//Re-Add Headline
+		var headline = $("<h6>");
+		headline.html('Score:');
+		this.scoreDisplay.append(headline);
+		//Add New Score Display of 0
+		var scorer = $("<p>");
+		scorer.addClass('big');
+		scorer.addClass('red');
+		scorer.html(this.score);
+		this.scoreDisplay.append(scorer);
+	}
 };
 
 //Answer Functions
 function addWinner(){
-	alert("Correct!");
+	thisTimer.stopInterval();
+	thisScore.stopInterval();
 }
 
 function addLoser(){
-	alert("Wrong!");
+	thisTimer.stopInterval();
+	thisScore.stopInterval();
+	thisScore.loserScore();
 }
