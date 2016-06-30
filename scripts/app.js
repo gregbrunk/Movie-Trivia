@@ -168,7 +168,7 @@ function Score(score){
 Score.prototype = {
 	applyScorer: function(){
 		var scorer = $("<p>");
-		scorer.attr('class', 'big');
+		scorer.attr({class:'big', id:'scorer'});
 		scorer.html(this.score);
 		this.scoreDisplay.append(scorer);
 		var self = this;
@@ -194,15 +194,11 @@ Score.prototype = {
 	loserScore: function(){
 		//Set Score to 0
 		this.score = 0;
-		//Empty Score Display
-		this.scoreDisplay.empty();
-		//Re-Add Headline
-		var headline = $("<h6>");
-		headline.html('Score:');
-		this.scoreDisplay.append(headline);
+		//Remove Score Display
+		$('#scorer').remove();
 		//Add New Score Display of 0
 		var scorer = $("<p>");
-		scorer.addClass('big');
+		scorer.attr({class:'big', id:'scorer'});
 		scorer.addClass('red');
 		scorer.html(this.score);
 		this.scoreDisplay.append(scorer);
