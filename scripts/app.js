@@ -13,7 +13,7 @@ var buttonTwo = $('#movie2');
 var buttonThree = $('#movie3');
 var buttonFour = $('#movie4');
 
-
+//Start Game Function
 $("#start").click(startGame);
 
 function startGame(){
@@ -46,6 +46,7 @@ Round.prototype = {
 		this.setOrderedAnswers();
 		this.randomizeAnswers(this.orderedAnswers);
 		this.setButtons();
+		this.addListeners();
 	},
 	//Append URL to iframe
 	setVideo: function(){
@@ -73,6 +74,42 @@ Round.prototype = {
 		buttonTwo.html(this.shuffledAnswers[1]);
 		buttonThree.html(this.shuffledAnswers[2]);
 		buttonFour.html(this.shuffledAnswers[3]);
+	},
+	//Add Listeners to My Buttons (BAD CODE!)
+	addListeners: function(){
+		var correctAnswer = buttonOne;
+		//Set Right Answer
+		if(buttonOne.html() == this.movieName) {
+			buttonOne.click(addWinner);
+			correctAnswer = buttonOne;
+		} else if (buttonTwo.html() == this.movieName){
+			buttonTwo.click(addWinner);
+			correctAnswer = buttonTwo;
+		} else if (buttonThree.html() == this.movieName) {
+			buttonThree.click(addWinner);
+			correctAnswer = buttonThree;
+		} else if (buttonFour.html() == this.movieName) {
+			buttonFour.click(addWinner);
+			correctAnswer = buttonFour;
+		}
+		//Set Wrong Answers
+		if (correctAnswer == buttonOne) {
+			buttonTwo.click(addLoser);
+			buttonThree.click(addLoser);
+			buttonFour.click(addLoser);
+		} else if (correctAnswer == buttonTwo) {
+			buttonOne.click(addLoser);
+			buttonThree.click(addLoser);
+			buttonFour.clikc(addLoser);
+		} else if (correctAnswer == buttonThree) {
+			buttonOne.click(addLoser);
+			buttonTwo.click(addLoser);
+			buttonFour.click(addLoser);
+		} else if (correctAnswer == buttonFour) {
+			buttonOne.click(addLoser);
+			buttonTwo.click(addLoser);
+			buttonThree.click(addLoser);
+		}
 	}
 };
 
@@ -138,3 +175,12 @@ Score.prototype = {
 		}
 	},
 };
+
+//Answer Functions
+function addWinner(){
+	alert("Correct!");
+}
+
+function addLoser(){
+	alert("Wrong!");
+}
