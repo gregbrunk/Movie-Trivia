@@ -6,7 +6,7 @@ var InfiniteRotator =
 			var initialFadeIn = 1000;
 			
 			//interval between items (in milliseconds)
-			var itemInterval = 6000;
+			var itemInterval = 7000;
 			
 			//cross-fade time (in milliseconds)
 			var fadeTime = 2500;
