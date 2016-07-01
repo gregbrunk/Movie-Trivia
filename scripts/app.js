@@ -1,36 +1,48 @@
-//Set Test Object
-var videoOne = {
-	url: "http://www.youtube.com/embed/7UpRNOkb4hw?modestbranding=1&autoplay=1&controls=0&fs=0&rel=0&showinfo=0&disablekb=1",
-	movieName: "Blades of Glory",
-	wrongNameOne: "Braids of Glory",
-	wrongNameTwo: "Anchorman",
-	wrongNameThree: "Poopy The Pirate King",
-};
-
 //Set Global Variables
+var shuffledMovies = movies;
 var buttonOne = $('#movie1');
 var buttonTwo = $('#movie2');
 var buttonThree = $('#movie3');
 var buttonFour = $('#movie4');
+var thisMovie;
 var thisRound;
 var roundTimer;
 var roundScorer;
+var userTimer = 30;
 
 var totalScore = 0;
 var round=1;
 var successful=0;
 
-//Start Game Function
+//Generate Movie Functions
+function shuffleMovies(){
+	for (var i = shuffledMovies.length-1; i > 0; --i) {
+		var j = Math.floor(Math.random() * (i+1));
+		var temp = shuffledMovies[i];
+		shuffledMovies[i] = shuffledMovies[j];
+		shuffledMovies[j] = temp;
+	}	
+}
+shuffleMovies(shuffledMovies);
+
+function generateMovie(){
+	thisMovie = shuffledMovies[0];
+	shuffledMovies.shift();
+}
+
+//Start the Game!
 $("#start").click(startGame);
 
+//Start Game Function
 function startGame(){
 	$("#start-screen").addClass("hide");
 	$("#main-content").removeClass("hide");
+	generateMovie();
 	//Start the Round
-	thisRound = new Round(videoOne.url, videoOne.movieName, videoOne.wrongNameOne, videoOne.wrongNameTwo, videoOne.wrongNameThree);
+	thisRound = new Round(thisMovie.url, thisMovie.movieName, thisMovie.wrongNameOne, thisMovie.wrongNameTwo, thisMovie.wrongNameThree);
 	thisRound.start();
 	//Start the Timer
-	roundTimer = new Timer(30);
+	roundTimer = new Timer(userTimer);
 	roundTimer.applyTimer();
 	//Start the Scoring
 	roundScorer = new Score(300);
@@ -169,8 +181,14 @@ Timer.prototype = {
 			window.clearInterval(this.timeInterval);
 		}
 		timer.html(":" + this.time);
+		
 		if (this.time<=5) {
 			timer.addClass('red');
+		}
+		if (this.time===0) {
+			alert("Time's Up! Next Round...");
+			$("#your-answer").text("Nothing! Silly...");
+			addLoser();
 		}
 	},
 	stopInterval: function(){
@@ -271,29 +289,68 @@ function updateTotals(movieName){
 function nextRoundScreen(){
 	$("#trivia-screen").addClass("hide");
 	$("#next-round").removeClass("hide");
+	$("#video-frame").removeAttr("src");
+	roundChecker();
 }
 
+$("#next-round-button").click(reset);
 $("#next-round-button").click(nextRound);
 
-function nextRound(){
-	round++;
+function reset(){
+	//Reset Classes
 	$("#next-round").addClass("hide");
 	$("#trivia-screen").removeClass("hide");
 	$('#scorer').remove();
 	$('#timer').remove();
 	$("#next-round").removeClass("bad-round");
 	$("#next-round").removeClass("good-round");
+	//Unbind Movies from Buttons
 	buttonOne.unbind();
 	buttonTwo.unbind();
 	buttonThree.unbind();
 	buttonFour.unbind();
+}
+
+function nextRound(){
+	//Update Round
+	round++;
+	//Change Round Number
+	$("#round-number").text(round);
+	//Generate New Movie
+	generateMovie();
 	//Start the Round
-	thisRound = new Round(videoOne.url, videoOne.movieName, videoOne.wrongNameOne, videoOne.wrongNameTwo, videoOne.wrongNameThree);
+	thisRound = new Round(thisMovie.url, thisMovie.movieName, thisMovie.wrongNameOne, thisMovie.wrongNameTwo, thisMovie.wrongNameThree);
 	thisRound.start();
 	//Start the Timer
-	roundTimer = new Timer(30);
+	roundTimer = new Timer(userTimer);
 	roundTimer.applyTimer();
 	//Start the Scoring
 	roundScorer = new Score(300);
 	roundScorer.applyScorer();
+}
+
+//Round Checker
+function roundChecker(){
+	if (round == 10){
+		$("#next-round-button").unbind();
+		$("#next-round-button").click(reload);
+		$("#next-round-button").html("Play Again?");
+	}
+}
+
+//User Timer Control
+$("#change-timer").click(changeTimer);
+function changeTimer(){
+	userTimer = prompt("Please enter a new timer length");
+	reset();
+	round = 0;
+	$("#video-frame").removeAttr("src");
+	$("#main-content").addClass("hide");
+	$("#start-screen").removeClass("hide");
+}
+
+//User Reload
+$("#reload").click(reload);
+function reload(){
+	location.reload();
 }
