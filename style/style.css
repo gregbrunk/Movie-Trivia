@@ -43,7 +43,7 @@ iframe {
 }
 
 .start-content {
-	margin-top: 180px;
+	margin-top: 90px;
 }
 
 .welcome {
@@ -55,13 +55,14 @@ iframe {
 
 .rules {
 	color: white;
-	margin-bottom: 110px;
+	margin-bottom: 60px;
 	font-weight: 100;
 	font-size: 20px;
 }
 
 #start {
 	margin-top: 0px;
+	margin-bottom: 75px;
 	width: 150px;
 	border-color: white;
 	color: white;
@@ -75,6 +76,24 @@ iframe {
 #start:active {
 	background-color: white;
 	color: #5691c8;
+}
+
+#image-container {
+	padding-left: 33%;
+	padding-top: 10px;
+}
+
+#rotating-item-wrapper {
+	position: relative;
+	width: 500px;
+	height: 200px;
+}
+
+.rotating-item {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 /*Main Game Screen*/
