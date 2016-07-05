@@ -349,8 +349,8 @@ function roundChecker(){
 $("#change-timer").click(changeTimer);
 function changeTimer(){
 	swal({
-		title: "Change Timer!",
-		text: "Please enter a new timer length",
+		title: "Enter Timer Length",
+		text: "Please enter a value in seconds",
 		type: "input",
 		showCancelButton: false,
 		closeOnConfirm: false,
@@ -363,7 +363,7 @@ function changeTimer(){
 				return false;
 			} else {
 			userTimer = inputValue;
-			swal("Nice!", "You wrote: " + inputValue, "success");
+			swal("Nice!", "Changing timer to: " + inputValue + " seconds", "success");
 			}
 			userScore = userTimer * 10;
 		}
