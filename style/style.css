@@ -17,12 +17,9 @@ iframe {
 }
 
 /*Buttons*/
-.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+.btn, .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
     outline: 0;
-}
-
-.buttonz {
-	font-weight: 100;
+    font-weight: 200;
 }
 
 /*Navigation*/
@@ -42,8 +39,8 @@ iframe {
 	padding: 0;
 }
 
-.start-content {
-	margin-top: 90px;
+#start-screen {
+	padding-top: 90px;
 }
 
 .welcome {
@@ -68,23 +65,20 @@ iframe {
 	color: white;
 }
 
-#start:hover {
+#start:hover, #start:active {
 	background-color: white;
 	color: #5691c8;
 }
 
-#start:active {
-	background-color: white;
-	color: #5691c8;
-}
-
+/*Rotating Review Content*/
 #image-container {
-	padding-left: 33%;
+	text-align: center;
 	padding-top: 10px;
 }
 
 #rotating-item-wrapper {
 	position: relative;
+	display: inline-block;
 	width: 500px;
 	height: 200px;
 }
@@ -140,8 +134,7 @@ iframe {
 	margin-left: 5px;
 }
 
-.good-round {
-	background-image: linear-gradient(90deg, #1D976C, #93F9B9);
+#next-round {
 	text-align: center;
 	z-index: 1;
 	height: calc(100vh - 50px - 50px);
@@ -149,20 +142,18 @@ iframe {
 	margin:0;
 }
 
+.good-round {
+	background-image: linear-gradient(90deg, #1D976C, #93F9B9);
+}
+
 .bad-round {
 	background-image: linear-gradient(90deg, #e53935, #e35d5b);
-	text-align: center;
-	z-index: 1;
-	height: calc(100vh - 50px - 50px);
-	padding-top: 180px;
-	margin:0;
 }
 
 #correct-incorrect{
 	color: white;
 	margin-bottom: 30px;
 	font-size: 90px;
-	font-family: "Helvetica Neue";
 	font-weight: 200;
 }
 
@@ -173,15 +164,11 @@ iframe {
 	color: white;
 }
 
-#next-round-button:hover {
+#next-round-button:hover, #next-round-button:active {
 	background-color: white;
 	color: #5691c8;
 }
 
-#next-round-button:active {
-	background-color: white;
-	color: #5691c8;
-}
 
 /*Right Side Content Pane*/
 .right {
@@ -227,7 +214,7 @@ iframe {
 	border-bottom: 5px solid #EDEDED;
     color: #29323c;
 	font-size: 16px;
-	margin:0;
+	margin-bottom: 5px;
 }
 
 .round-tally {
@@ -238,10 +225,6 @@ iframe {
 .score-tally {
 	text-align: right;
 	padding-right: 25px;
-}
-
-.scoreboard {
-	padding-top: 5px;
 }
 
 .scoreboard-row {
