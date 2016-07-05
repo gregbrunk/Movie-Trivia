@@ -11,8 +11,8 @@ Links:
 
 Technologies Used:
 - jQuery
-- Bootstrap CSS
-- Bootstrap JS
+- Bootstrap CSS and JS
+- SweetAlert CSS and JS (For awesome alerts and prompts)
 
 Installation Instructions:
 - To play the game visit: https://gregbrunk.github.io/Movie-Trivia/

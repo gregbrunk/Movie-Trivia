@@ -9,6 +9,7 @@ var thisRound;
 var roundTimer;
 var roundScorer;
 var userTimer = 30;
+var userScore = 300;
 
 var totalScore = 0;
 var round=1;
@@ -45,7 +46,7 @@ function startGame(){
 	roundTimer = new Timer(userTimer);
 	roundTimer.applyTimer();
 	//Start the Scoring
-	roundScorer = new Score(300);
+	roundScorer = new Score(userScore);
 	roundScorer.applyScorer();
 }
 
@@ -186,7 +187,13 @@ Timer.prototype = {
 			timer.addClass('red');
 		}
 		if (this.time===0) {
-			alert("Time's Up! Next Round...");
+			swal({
+				title: "Oops!",
+				text: "Time's Up...", 
+				type: "error",
+				confirmButtonText: "Next Round",
+				animation: "slide-from-top",
+			});
 			$("#your-answer").text("Nothing! Silly...");
 			addLoser();
 		}
@@ -341,7 +348,26 @@ function roundChecker(){
 //User Timer Control
 $("#change-timer").click(changeTimer);
 function changeTimer(){
-	userTimer = prompt("Please enter a new timer length");
+	swal({
+		title: "Change Timer!",
+		text: "Please enter a new timer length",
+		type: "input",
+		showCancelButton: false,
+		closeOnConfirm: false,
+		animation: "slide-from-top",
+		inputPlaceholder: "e.g. 15" 
+		}, 
+		function(inputValue){     
+			if (inputValue === ""){     
+				swal.showInputError("You need to write something!");     
+				return false;
+			} else {
+			userTimer = inputValue;
+			swal("Nice!", "You wrote: " + inputValue, "success");
+			}
+			userScore = userTimer * 10;
+		}
+	);
 	reset();
 	round = 0;
 	$("#video-frame").removeAttr("src");
